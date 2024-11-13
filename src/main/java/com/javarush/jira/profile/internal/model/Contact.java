@@ -30,9 +30,14 @@ public class Contact implements HasId {
     @Column(name = "id")
     private Long id;
 
-    @Id
+    //    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @Transient
     @ManyToOne
-    @JoinColumn(name = "id")
+    @MapsId("id") // Эта аннотация связывает поле `id` с `Profile`
+    @JoinColumn(name = "id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Transient
     private Profile profile;
@@ -45,7 +50,7 @@ public class Contact implements HasId {
 
     @NotBlank
     @Size(min = 2, max = 256)
-    @Column(name = "value", nullable = false)
+    @Column(name = "contactvalue", nullable = false)
     @NoHtml
     private String value;
 

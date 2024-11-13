@@ -13,8 +13,6 @@ spring:
   jpa:
     show-sql: true
     open-in-view: false
-#  config:
-#    import: "classpath:application-secret.properties"
 
 
     # validate db by model
@@ -100,9 +98,9 @@ spring:
 
 logging:
   level:
-    root: WARN
+    root: INFO
     com.javarush.jira: DEBUG
-    com.javarush.jira.common.config.MvcConfig: WARN
+    com.javarush.jira.common.config.MvcConfig: INFO
     org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
 
 server:

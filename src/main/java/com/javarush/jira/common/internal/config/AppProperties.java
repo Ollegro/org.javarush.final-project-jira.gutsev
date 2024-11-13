@@ -35,6 +35,8 @@ public class AppProperties {
     @NonNull
     private MailSendingProps mailSendingProps;
 
+
+
     //    https://stackoverflow.com/a/29588215/548473
     @Setter
     public static class MailSendingProps {

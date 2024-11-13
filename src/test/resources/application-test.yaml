@@ -1,8 +1,21 @@
-spring.cache.type: none
 spring:
-  init:
-    mode: always
-  datasource:
-    url: ${SPRING_DATASOURCE_DB_TEST_URL}
-    username: ${SPRING_DATASOURCE_DB_TEST_USERNAME}
-    password: ${SPRING_DATASOURCE_DB_TEST_PASSWORD}
+  cache:
+    type: none # Отключение кэширования
+  sql:
+    init:
+      mode: always # Инициализация базы данных всегда
+  liquibase:
+    change-log: classpath:changelog-test.sql # Путь к файлу миграции Liquibase
+  jpa:
+    show-sql: true # Показ SQL-запросов в консоли
+    properties:
+      hibernate:
+        format_sql: true # Форматирование SQL-запросов для удобства чтения
+
+
+
+
+
+
+
+
