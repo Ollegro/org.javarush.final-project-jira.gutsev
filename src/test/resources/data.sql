@@ -20,19 +20,19 @@ alter sequence SPRINT_ID_SEQ restart with 1;
 alter sequence PROJECT_ID_SEQ restart with 1;
 alter sequence USERS_ID_SEQ restart with 1;
 
-insert into USERS (ID, EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, DISPLAY_NAME)
+insert into USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, DISPLAY_NAME)
 values
-    (1, 'user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 'userDisplayName'),
-    (2, 'admin@gmail.com', '{noop}admin', 'adminFirstName', 'adminLastName', 'adminDisplayName'),
-    (3, 'guest@gmail.com', '{noop}guest', 'guestFirstName', 'guestLastName', 'guestDisplayName'),
-    (4, 'manager@gmail.com', '{noop}manager', 'managerFirstName', 'managerLastName', 'managerDisplayName');
+    ('user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 'userDisplayName'),
+    ('admin@gmail.com', '{noop}admin', 'adminFirstName', 'adminLastName', 'adminDisplayName'),
+    ('guest@gmail.com', '{noop}guest', 'guestFirstName', 'guestLastName', 'guestDisplayName'),
+    ('manager@gmail.com', '{noop}manager', 'managerFirstName', 'managerLastName', 'managerDisplayName');
 
 insert into PROFILE (ID, LAST_FAILED_LOGIN, LAST_LOGIN, MAIL_NOTIFICATIONS)
 values
     (1, null, null, 49),
     (2, null, null, 14);
 
-insert into CONTACT (ID, CODE, CONTACTVALUE)
+insert into CONTACT (ID, CODE, DATA)
 values
     (1, 'skype', 'userSkype'),
     (1, 'mobile', '+01234567890'),

@@ -50,7 +50,7 @@ public class Contact implements HasId {
 
     @NotBlank
     @Size(min = 2, max = 256)
-    @Column(name = "contactvalue", nullable = false)
+    @Column(name = "DATA", nullable = false)
     @NoHtml
     private String value;
 

@@ -98,7 +98,7 @@ create table CONTACT
 (
     ID    bigint       not null,
     CODE  varchar(32)  not null,
-    CONTACTVALUE varchar(256) not null,
+    DATA varchar(256) not null,
     primary key (ID, CODE),
     constraint FK_CONTACT_PROFILE foreign key (ID) references PROFILE (ID) on delete cascade
 );
@@ -241,7 +241,7 @@ values ('assigned', 'Assigned', 6, '1'),
 
 alter table SPRINT rename COLUMN TITLE to CODE;
 alter table SPRINT
-    alter column CODE type varchar (32);
+    alter column CODE set data type varchar (32);
 alter table SPRINT
     alter column CODE set not null;
 create unique index UK_SPRINT_PROJECT_CODE on SPRINT (PROJECT_ID, CODE);
