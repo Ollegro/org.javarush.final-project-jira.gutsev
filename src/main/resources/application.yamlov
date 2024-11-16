@@ -1,0 +1,94 @@
+spring:
+  config:
+    activate:
+      on-profile: test  # Замените на 'prod', если вы хотите активировать производственный профиль
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+app:
+  host-url: http://localhost:8080
+  test-mail: ${SPRING_MAIL_SERVER_USERNAME}
+  templates-update-cache: 5s
+  mail-sending-props:
+    core-pool-size: 8
+    max-pool-size: 100
+
+  datasource:
+    url: "jdbc:h2:mem:jira-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+    driver-class-name: "org.h2.Driver"
+    username: jira
+    password: JiraRush
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      format_sql: true
+      properties:
+        hibernate:
+          dialect: "org.hibernate.dialect.H2Dialect"
+
+  sql:
+    init:
+      mode: always
+
+  liquibase:
+    change-log: "classpath:db/changelog-test.sql"
+    enabled: true
+
+  mail:
+    host: ${SPRING_MAIL_SERVER_HOST}
+    username: ${SPRING_MAIL_SERVER_USERNAME}
+    password: ${SPRING_MAIL_SERVER_PASSWORD}
+    port: ${SPRING_MAIL_SERVER_PORT}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+
+app:
+  host-url: http://localhost:8080
+  test-mail: ${SPRING_MAIL_SERVER_USERNAME}
+  templates-update-cache: 5s
+  mail-sending-props:
+    core-pool-size: 8
+    max-pool-size: 100
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+      format_sql: true
+      default_batch_fetch_size: 20
+      jdbc.batch_size: 20
+
+  liquibase:
+    change-log: "classpath:db/changelog-prod.sql"
+
+  cache:
+    cache-names: users
+    caffeine:
+      spec: maximumSize=10000,expireAfterAccess=5m
+
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+
+  init:
+    mode: never
