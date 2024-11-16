@@ -1,21 +1,18 @@
 #  https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 app:
   host-url: http://localhost:8080
-  test-mail: jira4jr@gmail.com
+  test-mail: ${SPRING_MAIL_SERVER_USERNAME}
   templates-update-cache: 5s
   mail-sending-props:
     core-pool-size: 8
     max-pool-size: 100
 
 spring:
-  init:
-    mode: never
+
   jpa:
     show-sql: true
     open-in-view: false
 
-
-    # validate db by model
     hibernate:
       ddl-auto: validate
 
@@ -30,6 +27,7 @@ spring:
     url: ${SPRING_DATASOURCE_DB_URL}
     username: ${SPRING_DATASOURCE_DB_USERNAME}
     password: ${SPRING_DATASOURCE_DB_PASSWORD}
+
 
   liquibase:
     changeLog: "classpath:db/changelog.sql"
@@ -79,6 +77,7 @@ spring:
   sql:
     init:
       mode: always
+      data-locations: "classpath:data4dev/data.sql"
 
   mail:
     properties:

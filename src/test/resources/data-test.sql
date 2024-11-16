@@ -1,4 +1,4 @@
-delete from USER_BELONG;
+delete from USER_BELONG ;
 delete from ACTIVITY;
 delete from TASK;
 delete from SPRINT;
