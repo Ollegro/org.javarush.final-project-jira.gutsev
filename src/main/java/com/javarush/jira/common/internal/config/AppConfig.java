@@ -72,6 +72,8 @@ public class AppConfig {
     public DataSource testDataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(env.getProperty("SPRING_DATASOURCE_DB_TEST_URL"));
+        dataSourceBuilder.username(env.getProperty("SPRING_DATASOURCE_DB_USERNAME"));
+        dataSourceBuilder.password(env.getProperty("SPRING_DATASOURCE_DB_PASSWORD"));
         return dataSourceBuilder.build();
     }
 

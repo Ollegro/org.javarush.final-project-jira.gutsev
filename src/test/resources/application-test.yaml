@@ -1,21 +1,76 @@
+app:
+  host-url: http://localhost:8080
+  test-mail: ${SPRING_MAIL_SERVER_USERNAME}
+  templates-update-cache: 5s
+  mail-sending-props:
+    core-pool-size: 8
+    max-pool-size: 100
+
 spring:
   cache:
     type: none # Отключение кэширования
+#  datasource:
+#    url: jdbc:h2:mem:jira-test
+#    driver-class-name: org.h2.Driver
+#    username: jira
+#    password: JiraRush
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${SPRING_OAUTH_GITHUB_CLIENT_ID}
+            client-secret: ${SPRING_OAUTH_GITHUB_CLIENT_SECRET}
+            scope:
+              - email
+          google:
+            client-id: ${SPRING_OAUTH_GOOGLE_CLIENT_ID}
+            client-secret: ${SPRING_OAUTH_GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+          gitlab:
+            client-id: ${SPRING_OAUTH_GITLAB_CLIENT_ID}
+            client-secret: ${SPRING_OAUTH_GITLAB_CLIENT_SECRET}
+            client-name: GitLab
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope: read_user
+        provider:
+          gitlab:
+            authorization-uri: https://gitlab.com/oauth/authorize
+            token-uri: https://gitlab.com/oauth/token
+            user-info-uri: https://gitlab.com/api/v4/user
+            user-name-attribute: email
+
   sql:
     init:
       mode: always # Инициализация базы данных всегда
+      data-locations: "classpath:data-test.sql"
   liquibase:
-    change-log: classpath:changelog-test.sql # Путь к файлу миграции Liquibase
+    change-log: "classpath:changelog-test.sql"
+    enabled: true
   jpa:
     show-sql: true # Показ SQL-запросов в консоли
     properties:
+      jakarta.persistence.sharedCache.mode: ALL  # новое значение
       hibernate:
         format_sql: true # Форматирование SQL-запросов для удобства чтения
+  mail:
+    host: ${SPRING_MAIL_SERVER_HOST}
+    username: ${SPRING_MAIL_SERVER_USERNAME}
+    password: ${SPRING_MAIL_SERVER_PASSWORD}
+    port: ${SPRING_MAIL_SERVER_PORT}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
 
+logging:
+  level:
+    liquibase: INFO
+    org.springframework: info
 
-
-
-
-
-
-
+  # Убедитесь, что вы не добавляете сюда конфигурацию mail
