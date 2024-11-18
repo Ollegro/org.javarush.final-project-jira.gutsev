@@ -68,8 +68,6 @@ spring:
             enable: true
           auth: true
 
-
-
 logging:
   level:
     liquibase: INFO
