@@ -27,4 +27,14 @@
 - https://habr.com/ru/articles/259055/
 
 Список выполненных задач:
+2. Удалены социальные сети: vk, yandex.
+3. Вынесена чувствительная информация в secret.env.
+4. Для тестов поднимается H2, определены два бина в AppConfig c профилями test и prod.
+5. Написаны тесты для ProfileRestController.
+6. Изменен метод - com.javarush.jira.bugtracking.attachment.FileUtil#upload под использование NIO
+7. Добавлены tags для задач task и протестировано по REST API.
+9. Написан Dockerfile.
+10. Написан docker-compose для запуска контейнера сервера вместе с БД postgresql и nginx.
+11. Добавлена локализацию на нескольких языках для шаблонов писем (mails) и стартовой страницы index.html.
+
 ...
