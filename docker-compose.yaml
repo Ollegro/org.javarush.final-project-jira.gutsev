@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - backend
+
+
+  database:
+    container_name: postgres-data-base
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: jira
+      POSTGRES_PASSWORD: JiraRush  # Убедитесь, что здесь правильный формат, уберите пробел после `:`
+
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - backend
+
+  app:
+    container_name: jirarush
+    image: finalproject/jirarush
+    build:
+      context: .
+#      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_DB_USERNAME: ${SPRING_DATASOURCE_DB_USERNAME}
+      SPRING_DATASOURCE_DB_PASSWORD: ${SPRING_DATASOURCE_DB_PASSWORD}
+      SPRING_DATASOURCE_DB_URL: ${SPRING_DATASOURCE_DB_URL}
+      SPRING_MAIL_SERVER_HOST: ${SPRING_MAIL_SERVER_HOST}
+      SPRING_MAIL_SERVER_PASSWORD: ${SPRING_MAIL_SERVER_PASSWORD}
+      SPRING_MAIL_SERVER_PORT: ${SPRING_MAIL_SERVER_PORT}
+      SPRING_MAIL_SERVER_USERNAME: ${SPRING_MAIL_SERVER_USERNAME}
+      SPRING_OAUTH_GITHUB_CLIENT_ID: ${SPRING_OAUTH_GITHUB_CLIENT_ID}
+      SPRING_OAUTH_GITHUB_CLIENT_SECRET: ${SPRING_OAUTH_GITHUB_CLIENT_SECRET}
+      SPRING_OAUTH_GITLAB_CLIENT_ID: ${SPRING_OAUTH_GITLAB_CLIENT_ID}
+      SPRING_OAUTH_GITLAB_CLIENT_SECRET: ${SPRING_OAUTH_GITLAB_CLIENT_SECRET}
+      SPRING_OAUTH_GOOGLE_CLIENT_ID: ${SPRING_OAUTH_GOOGLE_CLIENT_ID}
+      SPRING_OAUTH_GOOGLE_CLIENT_SECRET: ${SPRING_OAUTH_GOOGLE_CLIENT_SECRET}
+#      spring.profiles.active: prod
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nginx
+      - database
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
