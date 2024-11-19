@@ -59,16 +59,27 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     //  http://www.codejava.net/frameworks/spring/spring-mvc-url-based-view-resolution-with-urlfilenameviewcontroller-example
+//    @Bean
+//    public SimpleUrlHandlerMapping getUrlHandlerMapping() {
+//        return new SimpleUrlHandlerMapping() {{
+//            setMappings(new Properties() {{
+//                put("/view/**", new UrlFilenameViewController());
+//            }});
+//            setOrder(0);
+//            setInterceptors(authInterceptor);
+//        }};
+//    }
     @Bean
     public SimpleUrlHandlerMapping getUrlHandlerMapping() {
-        return new SimpleUrlHandlerMapping() {{
-            setMappings(new Properties() {{
-                put("/view/**", new UrlFilenameViewController());
-            }});
-            setOrder(0);
-            setInterceptors(authInterceptor);
-        }};
+        SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
+        Properties mappings = new Properties();
+        mappings.put("/view/", new UrlFilenameViewController());
+        mapping.setMappings(mappings);
+        mapping.setOrder(0);
+        mapping.setInterceptors(authInterceptor);
+        return mapping;
     }
+
 
     //  https://springdoc.org/index.html#how-can-i-deploy-springdoc-openapi-ui-behind-a-reverse-proxy
     @Bean

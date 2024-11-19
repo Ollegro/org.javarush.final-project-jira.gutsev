@@ -28,14 +28,26 @@ public class ThymeleafConfig {
         return engine;
     }
 
+//    private FileTemplateResolver createTemplateResolver(String pfx) {
+//        return new FileTemplateResolver() {{
+//            setPrefix(pfx);
+//            setSuffix(".html");
+//            setTemplateMode(TemplateMode.HTML);
+//            setCacheable(true);
+//            setCacheTTLMs(appProperties.getTemplatesUpdateCache().toMillis());
+//            setCharacterEncoding("UTF-8");
+//        }};
+    //}
+
     private FileTemplateResolver createTemplateResolver(String pfx) {
-        return new FileTemplateResolver() {{
-            setPrefix(pfx);
-            setSuffix(".html");
-            setTemplateMode(TemplateMode.HTML);
-            setCacheable(true);
-            setCacheTTLMs(appProperties.getTemplatesUpdateCache().toMillis());
-            setCharacterEncoding("UTF-8");
-        }};
+        FileTemplateResolver resolver = new FileTemplateResolver();
+        resolver.setPrefix(pfx);
+        resolver.setSuffix(".html");
+        resolver.setTemplateMode(TemplateMode.HTML);
+        resolver.setCacheable(true);
+        resolver.setCacheTTLMs(appProperties.getTemplatesUpdateCache().toMillis());
+        resolver.setCharacterEncoding("UTF-8");
+        return resolver;
+
     }
 }

@@ -7,14 +7,17 @@ app:
     core-pool-size: 8
     max-pool-size: 100
 
+
 spring:
 
   jpa:
     show-sql: true
     open-in-view: false
 
+
     hibernate:
       ddl-auto: validate
+
 
     properties:
       #  http://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
@@ -24,10 +27,13 @@ spring:
         # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
         jdbc.batch_size: 20
   datasource:
+    hikari:
+      connection-timeout: 30000  # 30 секунд
+      minimum-idle: 5
+      maximum-pool-size: 10
     url: ${SPRING_DATASOURCE_DB_URL}
     username: ${SPRING_DATASOURCE_DB_USERNAME}
     password: ${SPRING_DATASOURCE_DB_PASSWORD}
-
 
   liquibase:
     changeLog: "classpath:db/changelog.sql"
@@ -97,19 +103,20 @@ spring:
 
 logging:
   level:
-    root: info
-    com.javarush.jira: info
-    com.javarush.jira.common.config.MvcConfig: info
-    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: info
+    root: debug
+    com.javarush.jira: debug
+    com.javarush.jira.common.config.MvcConfig: debug
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: debug
 
 server:
   #  https://springdoc.org/index.html#how-can-i-deploy-springdoc-openapi-ui-behind-a-reverse-proxy
   forward-headers-strategy: framework
   servlet:
     encoding:
-      charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly
-      enabled: true # Enable http encoding support
+      charset: UTF-8
+      enabled: true
       force: true
+  port: 8080
 springdoc.swagger-ui.path: /doc
 
 
