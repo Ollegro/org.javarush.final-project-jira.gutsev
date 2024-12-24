@@ -56,4 +56,6 @@ public class UserController extends AbstractUserController {
     public void changePassword(@RequestParam String oldPassword, @Size(min = 5, max = 128) @RequestParam String newPassword, @AuthenticationPrincipal AuthUser authUser) {
         changePassword0(oldPassword, newPassword, authUser.id());
     }
+
+
 }
