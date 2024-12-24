@@ -5,6 +5,8 @@ services:
     restart: always
     ports:
       - "80:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/config.d/nginx.conf
     networks:
       - backend
 
@@ -47,6 +49,7 @@ services:
 
     ports:
       - "8080:8080"
+
     depends_on:
       - nginx
       - database
